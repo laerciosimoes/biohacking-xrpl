@@ -1,0 +1,15 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git
+./.devprime
+./.vs
+./.vscode
+deployment.yml
+service.yml
+ingress.yml
+buildDocker.ps1
+/screenshot
