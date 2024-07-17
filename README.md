@@ -93,3 +93,37 @@ For any questions or inquiries, please contact us at laercio@biohacking.ai.
 ---
 
 © 2024 Biohacking.ai. All rights reserved.
+
+
+https://python.langchain.com/v0.2/docs/tutorials/qa_chat_history/
+
+
+https://python.langchain.com/v0.2/docs/tutorials/query_analysis/
+
+https://python.langchain.com/v0.2/docs/tutorials/data_generation/
+
+https://langchain-ai.github.io/langgraph/tutorials/plan-and-execute/plan-and-execute/
+
+https://langchain-ai.github.io/langgraph/tutorials/lats/lats/#graph-state
+
+
+
+Faucets
+Your Devnet Credentials Address
+raVeb22WGgWCJqrh4sVuLNT2VopbV3sNLy
+Secret
+sEdSRmApVWAA4VZ34tzEpjc87wN9qdr
+Balance
+100 XRP
+Sequence Number
+2498800
+
+Your Devnet Credentials
+Address
+rhzxsRumWVjvgLow9Dsyh8xujxDiBY6pDC
+Secret
+sEdTPXsZGcfNYDSm4n3aE2BzSsV1DPF
+Balance
+100 XRP
+Sequence Number
+2498855
