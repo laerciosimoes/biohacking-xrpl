@@ -9,13 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@thirdweb-dev/react": "^4.9.4",
-    "@thirdweb-dev/sdk": "^4.0.99",
     "daisyui": "^4.12.10",
     "next": "14.2.5",
+    "pino-pretty": "^11.2.1",
     "react": "^18",
     "react-dom": "^18",
-    "sharp": "^0.33.4"
+    "sharp": "^0.33.4",
+    "thirdweb": "^5.34.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.6",
