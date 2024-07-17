@@ -41,7 +41,5 @@ jobs:
           containerAppName: biohacking-healthcare
           resourceGroup: biohacking
           imageToBuild: hpcbrasil1.azurecr.io/biohacking-healthcare:${{ github.sha }}
-          _buildArgumentsKey_: |
-            _buildArgumentsValues_
 
 
