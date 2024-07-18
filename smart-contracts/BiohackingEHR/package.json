@@ -2,10 +2,6 @@
   "name": "biohackingehr",
   "version": "1.0.0",
   "description": "Smart-Contract to Biohacking Eletronic Medical Record",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Laercio Simoes",
   "license": "ISC",
   "dependencies": {
@@ -16,6 +12,7 @@
   },
   "devDependencies": {
     "@matterlabs/hardhat-zksync-solc": "^1.2.1",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.11",
     "@nomiclabs/hardhat-ethers": "^2.2.3",
     "@types/chai": "^4.3.16",
     "@types/mocha": "^10.0.7",

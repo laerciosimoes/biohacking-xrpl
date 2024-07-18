@@ -7,6 +7,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["hardhat.config.tssss", "scripts", "test"],
-  "files": ["hardhat.config.tssss"]
+  "include": ["hardhat.config.ts", "scripts", "test"],
+  "files": ["hardhat.config.ts"]
 }
