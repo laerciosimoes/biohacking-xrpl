@@ -1,0 +1,236 @@
+<html >
+
+<head>
+    <title>XRPL Token Test Harness</title>
+    <link href='https://fonts.googleapis.com/css?family=Work Sans' rel='stylesheet'>
+    <script src='https://unpkg.com/xrpl@2.6.0'></script>
+    <script>
+        if (typeof module !== "undefined") {
+            const xrpl = require('xrpl')
+        }
+    </script>
+    <style>
+        body {
+            font-family: "Work Sans", sans-serif;
+            padding: 20px;
+            background: #fafafa;
+            font-size: 0.8em;
+        }
+
+        h1 {
+            font-weight: bold;
+        }
+
+        button {
+            padding: 12px;
+            margin-bottom: 8px;
+            font-size: 1em;
+            background: #fff;
+            border-radius: 0.5em;
+            border: solid 2px #444;
+        }
+
+        button {
+            font-weight: bold;
+            font-family: "Work Sans", sans-serif;
+        }
+
+        button:hover {
+            background: #eee;
+            cursor: pointer;
+        }
+
+        td {
+            vertical-align: top;
+            padding-right: 10px;
+        }
+
+        #selectLedger {
+            background: #ff78bb;
+            padding: 1em 1em 0 1em;
+            border-radius: 1em;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 0 1em 0;
+            font-size: 1.25em;
+            line-height: 2em;
+        }
+
+        .appField {
+            vertical-align: top;
+            display: inline-block;
+            margin: 0 1em 0 0;
+        }
+
+        .appValue {
+            display: inline-block;
+            padding: 0.25em;
+
+            height: 2.5em;
+            font-size: 10px;
+            background: #efefef;
+            min-width: 200px;
+            border-radius: 0.5em;
+            margin: 0.25em 0 0.5em 0;
+        }
+
+        #standbyApp {
+            background: #86e3b0;
+            padding: 1.5em;
+            border-radius: 1em;
+            width: 100%;
+            max-width: 600px;
+            display: inline-block;
+            margin: 0 1em 0 0;
+        }
+
+        #standbyTransact {
+            display: inline-block;
+            background: #42df89;
+            border-radius: 0.5em;
+            display: inline-block;
+            margin: 0.5em 0;
+            padding: 0 1.5em;
+            min-width: 90%;
+        }
+
+        #standbyResultField {
+            display: inline-block;
+            padding: 0.25em;
+            border: solid 1px white;
+            height: 2em;
+            font-size: 1em;
+            background: #efefef;
+            width: 100%;
+            border-radius: 3px;
+            margin: 0.25em 0 0.5em 0;
+            height: 100px;
+            overflow-y: scroll;
+        }
+
+
+        input {
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="selectLedger">
+        <div class="appField">
+            <strong>Choose your ledger instance:</strong><br />
+            <input aria-label="tn" type="radio" id="tn" name="server" value="wss://s.altnet.rippletest.net:51233"
+                checked>
+            <label for="testnet">Testnet</label>
+            &nbsp;&nbsp;
+            <input aria-label="dn" type="radio" id="dn" name="server" value="wss://s.devnet.rippletest.net:51233">
+            <label for="devnet">Devnet</label>
+            <br /><br />
+        </div>
+    </div>
+    <div id="standbyApp">
+        <button type="button" onClick="getAccount('standby')">Create Account</button><br />
+
+        <h2>Account Info</h2>
+        <div class="appField">Account<br />
+            <div id="standbyAccountField" class="appValue"></div>
+        </div>
+        <div class="appField">Public Key<br />
+            <div id="standbyPubKeyField" class="appValue"></div>
+        </div>
+        <div class="appField">Private Key<br />
+            <div id="standbyPrivKeyField" class="appValue"></div>
+        </div>
+        <div class="appField"> Seed<br />
+            <div id="standbySeedField" class="appValue"></div>
+        </div>
+        <div class="appField"> XRP Balance<br />
+            <div id="standbyBalanceField" class="appValue"></div>
+        </div>
+        <p><strong>Transaction Log</strong></p>
+        <div id="standbyResultField"></div>
+    </div>
+    <script>
+        // ************* Define HTML Form Fields as constants **************
+        const tn = document.getElementById("tn");
+        const dn = document.getElementById("dn");
+        const standbyResultField = document.getElementById("standbyResultField");
+        const operationalResultsField = document.getElementById("operationalResultField");
+        const standbyAccountField = document.getElementById("standbyAccountField");
+        const standbyPubKeyField = document.getElementById("standbyPubKeyField");
+        const standbyPrivKeyField = document.getElementById("standbyPrivKeyField");
+        const standbyBalanceField = document.getElementById("standbyBalanceField");
+        const standbySeedField = document.getElementById("standbySeedField");
+        // ************* Get the Preferred Network **************
+        function getNet() {
+            let net;
+            if (tn.checked) net = "wss://s.altnet.rippletest.net:51233";
+            if (dn.checked) net = "wss://s.devnet.rippletest.net:51233";
+            return net;
+        } // End of getNet()
+
+        // ************* Get Account *****************************
+        async function getAccount(type) {
+            let net = getNet();
+
+            const client = new xrpl.Client(net);
+            results = "Connecting to " + net + "....<br/>";
+
+            // This uses the default faucet for Testnet/Devnet
+            let faucetHost = null;
+            let amount = '930';
+            if (type == "standby") {
+                standbyResultField.innerHTML = results;
+            } else {
+                operationalResultField.innerHTML = results;
+            }
+            await client.connect();
+
+            results += "\nConnected, funding wallet.<br/>";
+            if (type == "standby") {
+                standbyResultField.innerHTML = results;
+            } else {
+                operationalResultField.innerHTML = results;
+            }
+
+            // -----------------------------------Create and fund a test account wallet
+            const my_wallet = (await client.fundWallet(null, { amount, faucetHost })).wallet;
+
+            results += "\nGot a wallet.<br/>";
+            if (type == "standby") {
+                standbyResultField.innerHTML = results;
+            } else {
+                operationalResultField.innerHTML = results;
+            }
+
+            // -----------------------------------Get the current balance.
+            const my_balance = await client.getXrpBalance(my_wallet.address);
+
+            if (type == "standby") {
+                standbyAccountField.innerHTML = my_wallet.address;
+                standbyPubKeyField.innerHTML = my_wallet.publicKey;
+                standbyPrivKeyField.innerHTML = my_wallet.privateKey;
+                standbyBalanceField.innerHTML = await client.getXrpBalance(
+                    my_wallet.address
+                );
+                standbySeedField.innerHTML = my_wallet.seed;
+                results += "\nStandby account created.<br/>";
+                standbyResultField.innerHTML = results;
+            } else {
+                operationalAccountField.innerHTML = my_wallet.address;
+                operationalPubKeyField.innerHTML = my_wallet.publicKey;
+                operationalPrivKeyField.innerHTML = my_wallet.privateKey;
+                operationalSeedField.innerHTML = my_wallet.seed;
+                operationalBalanceField.innerHTML = await client.getXrpBalance(
+                    my_wallet.address
+                );
+                results += "\nOperational account created.<br/>";
+                operationalResultField.innerHTML = results;
+            }
+
+            client.disconnect();
+        } // End of getAccount()
+    </script>
+</body>
+
+</html>
