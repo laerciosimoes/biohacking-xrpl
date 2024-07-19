@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import { ConnectButton } from "thirdweb/react";
 import { client } from "./client";
@@ -5,6 +6,7 @@ import Link from 'next/link';
 import Footer from "./components/footer";
 import logo from "@public/Logo.png"; // Certifique-se de que o caminho está correto
 import {darkTheme} from "thirdweb/react"
+import Footer from './components/footer'; // Ajuste o caminho conforme necessário
 
 const customTheme = darkTheme({
   colors: {
@@ -12,10 +14,9 @@ const customTheme = darkTheme({
   },
 });
 
-export default function Home() {
+export default async function Home() {
   return (
-    <main className="relative min-h-screen flex flex-col">
-      {/* Vídeo de Background */}
+    <main>
       <video
         autoPlay
         loop
@@ -30,7 +31,6 @@ export default function Home() {
         Your browser does not support the video tag.
       </video>
 
-      {/* Botão de Conexão */}
       <div className="absolute top-4 right-4 z-10">
         <ConnectButton
           client={client}
@@ -49,7 +49,6 @@ export default function Home() {
         />
       </div>
 
-      {/* Caixa Transparente com Texto e Botão de Cadastro */}
       <div className="flex items-center justify-center min-h-screen">
       <div className="p-6 bg-black bg-opacity-70 rounded-lg shadow-lg max-w-3xl text-left">        <p className="text-white font-aldrich text-2xl mb-4">
             Desbloqueie o potencial dos seus dados médicos com a combinação poderosa de Blockchain e IA. Cadastre-se agora e aproveite o poder do biohacking!
