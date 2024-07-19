@@ -1,56 +1,83 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity 0.8.24;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract WasmNFT is ERC721 {
-    // Estrutura para armazenar os metadados do NFT
-    struct WasmMetadata {
-        string name; // Nome do arquivo Wasm
-        string ipfsHash; // Hash IPFS do arquivo Wasm
-        address owner; // Endereço do proprietário atual
+contract WasmNFT is ERC721URIStorage, Ownable {
+    struct Record {
+        string data;
+        uint256 timestamp;
     }
 
-    // Array de metadados dos NFTs registrados
-    WasmMetadata[] public wasmNFTs;
+    mapping(address => Record[]) private records;
+    mapping(address => mapping(address => bool)) private permissions;
+    mapping(address => uint256) private patientTokenIds;
+    uint256 private _tokenIdCounter;
 
-    // Mapeamento de hash IPFS para ID do NFT
-    mapping(string => uint256) ipfsToTokenId;
+    event RecordAdded(address indexed patient, uint256 index, string data, uint256 timestamp);
+    event PermissionGranted(address indexed patient, address indexed grantee);
+    event PermissionRevoked(address indexed patient, address indexed grantee);
+    event TokenMinted(address indexed patient, uint256 tokenId);
 
-    // Evento emitido quando um novo NFT é registrado
-    event NFTRegistered(uint256 tokenId, string name, string ipfsHash, address owner);
-
-    constructor() ERC721("WasmNFT", "WNFT") {}
-
-    // Função para registrar um novo NFT
-    function registerWasmNFT(string memory _name, string memory _ipfsHash) external {
-        require(ipfsToTokenId[_ipfsHash] == 0, "NFT already registered");
-
-        // Incrementa o ID do NFT
-        uint256 tokenId = wasmNFTs.length + 1;
-
-        // Cria um novo NFT com os metadados fornecidos
-        wasmNFTs.push(WasmMetadata({
-            name: _name,
-            ipfsHash: _ipfsHash,
-            owner: msg.sender
-        }));
-
-        // Mapeia o hash IPFS para o ID do NFT
-        ipfsToTokenId[_ipfsHash] = tokenId;
-
-        // Emite o evento de registro do NFT
-        emit NFTRegistered(tokenId, _name, _ipfsHash, msg.sender);
-
-        // Cria o NFT usando o ERC721
-        _mint(msg.sender, tokenId);
+    // Adicione um endereço inicial para o proprietário
+    constructor(address initialOwner) 
+        ERC721("WasmNFT", "WNFT") 
+        Ownable(initialOwner) {
+        transferOwnership(initialOwner);
     }
 
-    // Função para obter os metadados de um NFT pelo seu ID
-    function getWasmNFT(uint256 _tokenId) external view returns (string memory name, string memory ipfsHash, address owner) {
-        require(_tokenId > 0 && _tokenId <= wasmNFTs.length, "Invalid NFT ID");
-        
-        WasmMetadata storage nft = wasmNFTs[_tokenId - 1];
-        return (nft.name, nft.ipfsHash, nft.owner);
+    modifier onlyPatient(address patient) {
+        require(patient == msg.sender, "Access restricted to the patient only.");
+        _;
+    }
+
+    modifier hasPermission(address patient) {
+        require(
+            msg.sender == patient || permissions[patient][msg.sender],
+            "Access denied. No permission to view records."
+        );
+        _;
+    }
+
+    function addRecord(string memory _data) public {
+        Record memory newRecord = Record({
+            data: _data,
+            timestamp: block.timestamp
+        });
+        records[msg.sender].push(newRecord);
+        emit RecordAdded(msg.sender, records[msg.sender].length - 1, _data, block.timestamp);
+
+        uint256 tokenId = patientTokenIds[msg.sender];
+        if (tokenId != 0) {
+            _setTokenURI(tokenId, _data);
+        } else {
+            _tokenIdCounter++;
+            tokenId = _tokenIdCounter;
+            _mint(msg.sender, tokenId);
+            _setTokenURI(tokenId, _data);
+            patientTokenIds[msg.sender] = tokenId;
+            emit TokenMinted(msg.sender, tokenId);
+        }
+    }
+
+    function grantPermission(address _address) public onlyPatient(msg.sender) {
+        permissions[msg.sender][_address] = true;
+        emit PermissionGranted(msg.sender, _address);
+    }
+
+    function revokePermission(address _address) public onlyPatient(msg.sender) {
+        permissions[msg.sender][_address] = false;
+        emit PermissionRevoked(msg.sender, _address);
+    }
+
+    function getRecords() public view hasPermission(msg.sender) returns (Record[] memory) {
+        return records[msg.sender];
+    }
+
+    function getRecord(uint256 index) public view hasPermission(msg.sender) returns (string memory data, uint256 timestamp) {
+        require(index < records[msg.sender].length, "Invalid record index.");
+        Record storage record = records[msg.sender][index];
+        return (record.data, record.timestamp);
     }
 }
