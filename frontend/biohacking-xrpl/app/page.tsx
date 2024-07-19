@@ -5,14 +5,16 @@ import { client } from "./client";
 import Link from 'next/link'; 
 import Footer from "./components/footer";
 import logo from "@public/Logo.png"; // Certifique-se de que o caminho está correto
+import LogoWhite from "@public/LogoWhite.png"; // Certifique-se de que o caminho está correto
 import {darkTheme} from "thirdweb/react"
+import { createWallet } from "thirdweb/wallets";
 
 const customTheme = darkTheme({
   colors: {
   connectedButtonBg: "black",
   },
 });
-
+const wallets = [createWallet("io.metamask")];
 export default async function Home() {
   return (
     <main>
@@ -33,15 +35,15 @@ export default async function Home() {
       <div className="absolute top-4 right-4 z-10">
         <ConnectButton
           client={client}
-          theme = {"light"}
-  
+          theme={"light"}
+          connectModal={{ size: "wide" }}
         />
       </div>
 
       {/* Logo no canto superior esquerdo */}
       <div className="absolute top-2 left-4 z-10">
         <Image 
-          src={logo} 
+          src={LogoWhite} 
           alt="Logo"
           width={250} // Ajuste a largura conforme necessário
           height={250} // Ajuste a altura conforme necessário
@@ -56,10 +58,9 @@ export default async function Home() {
             Cadastro
           </Link>
         </div>
+  
         </div>
-    
 
-      {/* Footer */}
       <Footer />
     </main>
   );
