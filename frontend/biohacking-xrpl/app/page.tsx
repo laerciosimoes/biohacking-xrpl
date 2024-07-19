@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Footer from "./components/footer";
 import logo from "@public/Logo.png"; // Certifique-se de que o caminho está correto
 import {darkTheme} from "thirdweb/react"
-import Footer from './components/footer'; // Ajuste o caminho conforme necessário
 
 const customTheme = darkTheme({
   colors: {
