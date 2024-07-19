@@ -1,10 +1,10 @@
+
 import Image from "next/image";
 import { ConnectButton } from "thirdweb/react";
 import thirdwebIcon from "@public/thirdweb.svg";
 import { client } from "./client";
 import Footer from './components/footer'; // Ajuste o caminho conforme necessário
-
-export default function Home() {
+export default async function Home() {
   return (
     <main className="relative min-h-screen bg-black">
       {/* Vídeo de Background */}
@@ -29,10 +29,6 @@ export default function Home() {
           <div className="flex justify-end mb-6">
             <ConnectButton
               client={client}
-              appMetadata={{
-                name: "Example App",
-                url: "https://example.com",
-              }}
             />
           </div>
 

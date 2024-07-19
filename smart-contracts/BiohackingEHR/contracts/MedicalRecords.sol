@@ -26,6 +26,10 @@ contract MedicalRecords {
         emit RecordAdded(msg.sender, records[msg.sender].length - 1, _data, block.timestamp);
     }
 
+    function getHealth() public view returns (string memory) {
+        return "Healthy";
+    }
+
     // Function to get all medical records of the sender (patient)
     function getRecords() public view returns (Record[] memory) {
         return records[msg.sender];
