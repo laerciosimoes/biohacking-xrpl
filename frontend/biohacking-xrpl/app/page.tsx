@@ -6,8 +6,7 @@ import { client } from "./client";
 import Footer from './components/footer'; // Ajuste o caminho conforme necessário
 export default async function Home() {
   return (
-    <main className="relative min-h-screen bg-black">
-      {/* Vídeo de Background */}
+    <main>
       <video
         autoPlay
         loop
@@ -18,12 +17,10 @@ export default async function Home() {
           maxWidth: "100vw",   // Define largura máxima como largura da tela
         }}
       >
-        {/* Remova 'public/' do src */}
         <source src="/page1.mov" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
-      {/* Conteúdo da Página */}
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <div className="p-4 max-w-screen-lg mx-auto text-white">
           <div className="flex justify-end mb-6">
@@ -32,7 +29,6 @@ export default async function Home() {
             />
           </div>
 
-          {/* Botão de Redirecionamento para Cadastro */}
           <div className="flex justify-center mb-6">
             <a
               href="/components/signup"
