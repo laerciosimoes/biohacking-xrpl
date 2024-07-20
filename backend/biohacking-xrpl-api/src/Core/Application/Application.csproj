@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<DebugType>full</DebugType>
+		<Version>1.0.0.0</Version>
+	</PropertyGroup>
+	<PropertyGroup>
+      <ProjectGuid>{1ebcdb06-5294-4b06-9c45-1a8d299278d1}</ProjectGuid>
+    </PropertyGroup>		
+	<ItemGroup>
+		<PackageReference Include="devprime.stack.foundation" Version="8.0.3" />
+  	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Domain\Domain.csproj" />
+	</ItemGroup>
+</Project>
