@@ -7,7 +7,7 @@ async function main() {
     console.log("Deploying contracts with the account:", deployer.address);
 
     const WasmNFT = await ethers.getContractFactory("WasmNFT");
-    const wasmNFT = await WasmNFT.deploy(); // Não precisa passar o endereço para o deploy do contrato Ownable
+    const wasmNFT = await WasmNFT.deploy(); // Verifique se o construtor do contrato não requer argumentos
 
     console.log("WasmNFT deployed to:", wasmNFT.address);
 

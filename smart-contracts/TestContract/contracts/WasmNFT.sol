@@ -4,6 +4,8 @@ pragma solidity 0.8.24;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+import "hardhat/console.sol";
+
 contract WasmNFT is ERC721URIStorage, Ownable {
     struct Record {
         string data;
@@ -20,14 +22,17 @@ contract WasmNFT is ERC721URIStorage, Ownable {
     event PermissionRevoked(address indexed patient, address indexed grantee);
     event TokenMinted(address indexed patient, uint256 tokenId);
 
-    // Adicione um endereço inicial para o proprietário
+    // Construtor que recebe o endereço inicial do proprietário
     constructor(address initialOwner) 
         ERC721("WasmNFT", "WNFT") 
-        Ownable(initialOwner) {
-        transferOwnership(initialOwner);
+        Ownable(initialOwner) 
+    {
+        // O endereço inicial do proprietário já é passado para o construtor Ownable
     }
 
     modifier onlyPatient(address patient) {
+        console.log('Message Sender', msg.sender);
+        console.log('Patient', patient);
         require(patient == msg.sender, "Access restricted to the patient only.");
         _;
     }
@@ -40,7 +45,7 @@ contract WasmNFT is ERC721URIStorage, Ownable {
         _;
     }
 
-    function addRecord(string memory _data) public {
+    function addRecord(string memory _data) public onlyPatient(msg.sender) {
         Record memory newRecord = Record({
             data: _data,
             timestamp: block.timestamp
@@ -75,9 +80,24 @@ contract WasmNFT is ERC721URIStorage, Ownable {
         return records[msg.sender];
     }
 
+    // Nova função getRecords sobrecarregada que aceita um endereço de paciente
+    function getRecords(address patient) public view hasPermission(patient) returns (Record[] memory) {
+        return records[patient];
+    }
+
     function getRecord(uint256 index) public view hasPermission(msg.sender) returns (string memory data, uint256 timestamp) {
         require(index < records[msg.sender].length, "Invalid record index.");
         Record storage record = records[msg.sender][index];
         return (record.data, record.timestamp);
+    }
+
+    // Função pública para obter o tokenId associado a um paciente
+    function getPatientTokenId(address patient) public view returns (uint256) {
+        return patientTokenIds[patient];
+    }
+
+    // Função pública para verificar permissões
+    function checkPermission(address patient, address _address) public view returns (bool) {
+        return permissions[patient][_address];
     }
 }
