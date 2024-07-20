@@ -1,12 +1,15 @@
 'use client';
 import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
-
+import { ConnectButton } from "thirdweb/react";
+import { client } from "../client";
+import { useActiveAccount, useWalletBalance } from "thirdweb/react";
+import { upload } from "thirdweb/storage";
 
 export default function Upload() {
     const [file, setFile] = useState<File | null>(null);
     const [symptoms, setSymptoms] = useState<string>('');
-
+    const activeAccount = useActiveAccount();
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -18,27 +21,43 @@ export default function Upload() {
             fileReader.onloadend = async () => {
                 const base64 = fileReader.result;
                 const jsonData = {
+                    dateTransacted: new Date().toISOString(),
                     symptoms: symptoms,
                     fileContent: base64,
                 };
+
                 console.log("Original JSON Data: ", jsonData);
                 const encryptedData = CryptoJS.AES.encrypt(
                     JSON.stringify(jsonData),
-                    'your-secret-key'
+                    activeAccount?.address || ""
                 ).toString();
                 console.log("Encrypted Data: ", encryptedData);
 
+                // Upload encrypted data to storage
+                console.log("Uploading encrypted data to storage...");
+                const uri = upload({
+                    client,
+                    files: [new File([encryptedData], "biohacking.txt")],
+                }).then((uri) => {
+                    console.log("Uploaded URI: ", uri);
+                }).catch((e) => {
+                    console.error("Error uploading to storage: ", e);
+                }).finally(() => {
+                    console.log("Upload complete.");
+                });
+
+
                 // Save encrypted data as a file
-                const blob = new Blob([encryptedData], { type: 'text/plain' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'encryptedData.txt';
-                document.body.appendChild(a);
+                //const blob = new Blob([encryptedData], { type: 'text/plain' });
+                //const url = URL.createObjectURL(blob);
+                //const a = document.createElement('a');
+                //a.href = url;
+                //a.download = 'encryptedData.txt';
+                //document.body.appendChild(a);
                 //a.style.display = 'none'; // Ensure the link is not visible
-                a.click();
-                document.body.removeChild(a);
-               
+                //a.click();
+                //document.body.removeChild(a);
+
             };
             fileReader.readAsDataURL(file);
 
@@ -99,6 +118,11 @@ export default function Upload() {
                     >
                         Submit
                     </button>
+                    <ConnectButton
+                        client={client}
+                        theme={"light"}
+                        connectModal={{ size: "wide" }}
+                    />
                 </form>
             </div>
         </div>
