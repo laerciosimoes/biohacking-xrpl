@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.24;
 
 contract MedicalRecords {
     struct Record {
@@ -26,7 +26,7 @@ contract MedicalRecords {
         emit RecordAdded(msg.sender, records[msg.sender].length - 1, _data, block.timestamp);
     }
 
-    function getHealth() public view returns (string memory) {
+     function getHealth() public view returns (string memory) {
         return "Healthy";
     }
 
