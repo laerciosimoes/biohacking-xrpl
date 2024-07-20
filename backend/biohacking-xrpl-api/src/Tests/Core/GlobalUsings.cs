@@ -1,0 +1,15 @@
+global using System;
+global using System.Collections.Generic;
+global using Xunit;
+global using Moq;
+global using DevPrime.Stack.Foundation;
+global using DevPrime.Stack.Foundation.Exceptions;
+global using DevPrime.Stack.Test;
+global using System.Linq;
+global using Application.Interfaces.Adapters.State;
+global using Application.Services.Patient;
+global using Application.EventHandlers.Patient;
+global using Application.Services.Patient.Model;
+global using Domain.Aggregates.Patient;
+global using Domain.Aggregates.Patient.Events;
+global using Application.Interfaces.Services;
