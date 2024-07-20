@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 import "hardhat/console.sol";
 
-contract WasmNFT is ERC721URIStorage, Ownable {
+contract MedicalNFT is ERC721URIStorage, Ownable {
     struct Record {
         string data;
         uint256 timestamp;
@@ -24,15 +24,13 @@ contract WasmNFT is ERC721URIStorage, Ownable {
 
     // Construtor que recebe o endereço inicial do proprietário
     constructor(address initialOwner) 
-        ERC721("WasmNFT", "WNFT") 
+        ERC721("MedicalNFT", "MedNFT") 
         Ownable(initialOwner) 
     {
         // O endereço inicial do proprietário já é passado para o construtor Ownable
     }
 
     modifier onlyPatient(address patient) {
-        console.log('Message Sender', msg.sender);
-        console.log('Patient', patient);
         require(patient == msg.sender, "Access restricted to the patient only.");
         _;
     }
