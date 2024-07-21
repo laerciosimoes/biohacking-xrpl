@@ -2,20 +2,14 @@
 import Image from 'next/image';
 import { ConnectButton } from "thirdweb/react";
 import { client } from './client';
-import Link from 'next/link'; 
+import Link from 'next/link';
 import Footer from './components/footer';
 import LogoWhite from "@public/logo-white.png";
-import { darkTheme } from 'thirdweb/react';
 
-const customTheme = darkTheme({
-  colors: {
-    connectedButtonBg: 'black',
-  },
-});
 
-const Home: React.FC = () => {
+
+export default function Home() {
   return (
-
     <main>
       <video
         autoPlay
@@ -30,24 +24,22 @@ const Home: React.FC = () => {
         <source src="/page1.mov" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-
       <div className="absolute top-4 right-4 z-10">
         <ConnectButton
           client={client}
-          theme={customTheme}
+          theme="light"
           connectModal={{ size: 'wide' }}
         />
       </div>
 
       <div className="absolute top-2 left-4 z-10">
-        <Image 
-          src={LogoWhite} 
+        <Image
+          src={LogoWhite}
           alt="Logo"
           width={250}
           height={250}
         />
       </div>
-
       <div className="flex items-center justify-center min-h-screen">
         <div className="p-6 bg-black bg-opacity-70 rounded-lg shadow-lg max-w-3xl text-left">
           <p className="text-white font-aldrich text-2xl mb-4">
@@ -62,6 +54,4 @@ const Home: React.FC = () => {
       <Footer />
     </main>
   );
-};
-
-export default Home;
+}

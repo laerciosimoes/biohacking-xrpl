@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "target": "ES2021",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"],
+      "@public/*": ["./public/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "app/.next/types/**/*.ts",
+    "tailwind.config.ts",
+    ".next/types/**/*.ts",
+    "types/**/*.d.ts"
+, "../biohacking-xrpl/app/signup/page.tsx"    
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

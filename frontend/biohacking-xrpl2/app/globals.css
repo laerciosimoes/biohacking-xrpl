@@ -1,0 +1,11 @@
+/* styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Adicione a fonte como uma fonte padrão */
+body {
+  font-family: 'Aldrich', sans-serif;
+}
