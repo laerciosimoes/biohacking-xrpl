@@ -1,4 +1,4 @@
-﻿global using DevPrime.Stack.Foundation.Application;
+global using DevPrime.Stack.Foundation.Application;
 global using DevPrime.Stack.Foundation;
 global using System;
 global using System.Linq;
