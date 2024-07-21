@@ -15,6 +15,7 @@ const customTheme = darkTheme({
 
 const Home: React.FC = () => {
   return (
+    
     <main>
       <video
         autoPlay

@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@thirdweb-dev/react": "^4.9.4",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
     "ethers": "^5.7.2",
@@ -20,9 +19,6 @@
     "thirdweb": "^5.37.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.4.6",
-    "@testing-library/react": "^16.0.0",
-    "@testing-library/user-event": "^14.5.2",
     "@types/crypto-js": "^4.2.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^20",
