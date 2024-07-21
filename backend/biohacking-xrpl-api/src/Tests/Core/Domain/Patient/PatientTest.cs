@@ -1,7 +1,7 @@
 namespace Core.Tests;
 public class PatientTest
 {
-    public static Guid FixedID = new Guid("25e0c7d8-f96e-4853-9341-714b3c862ccf");
+    public static Guid FixedID = new Guid("98c14744-f441-4e24-83af-804a6338d2f1");
 
 #region fixtures
     public static Domain.Aggregates.Patient.Patient Create_Patient_Required_Properties_OK(DpTest dpTest)
@@ -18,7 +18,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -41,7 +41,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -64,7 +64,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -87,7 +87,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -110,7 +110,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -133,7 +133,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -156,7 +156,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -179,7 +179,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "City", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -202,7 +202,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "City", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -225,7 +225,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "City", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -272,7 +272,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Medications", Faker.Lorem.Sentence(1));
@@ -295,7 +295,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Medications", Faker.Lorem.Sentence(1));
@@ -318,7 +318,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Medications", Faker.Lorem.Sentence(1));
@@ -341,7 +341,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -364,7 +364,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -387,7 +387,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));
@@ -410,7 +410,7 @@ public class PatientTest
         dpTest.Set<string>(patient, "State", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Zip", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "Country", Faker.Lorem.Sentence(1));
-        dpTest.Set<DateTime>(patient, "DateOfBirth", DateTime.Now);
+        dpTest.Set<Nullable<System.DateTime>>(patient, "DateOfBirth", DateTime.Now);
         dpTest.Set<string>(patient, "EmergencyContact", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalConditions", Faker.Lorem.Sentence(1));
         dpTest.Set<string>(patient, "MedicalHistoric", Faker.Lorem.Sentence(1));

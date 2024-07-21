@@ -1,19 +1,32 @@
 'use client';
 import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
-import { useStateContext } from "../context/StateContext";
-import { ThirdwebStorage } from "@thirdweb-dev/storage"; // Importe o storage client
+import { useActiveAccount, useAutoConnect } from "thirdweb/react";
+import { upload } from "thirdweb/storage";
 
-// Defina a variável client
-const storageClient = new ThirdwebStorage();
+import { TransactionButton } from "thirdweb/react";
+//import { useAddress, useContract, useMetamask, useContractWrite } from 'thirdweb/react';
+import { client } from '../client';
+import { getContract, defineChain, prepareContractCall } from "thirdweb";
+
 
 export default function Upload() {
     const [file, setFile] = useState<File | null>(null);
     const [symptoms, setSymptoms] = useState<string>('');
-    const { address, createRecord } = useStateContext(); // Remova 'connect' aqui, pois a conexão já foi feita
+    ///const { contract } = useContract('0x1e2C53a3E906da8890BaB18593cBeE1513b79096'); 
+    const chain = defineChain(1440002);
+    const contract = getContract({
+        client,
+        chain: chain, 
+        address: "0x1e2C53a3E906da8890BaB18593cBeE1513b79096'); ",
+    });
 
+    // const { address, createRecord } = useStateContext(); // Remova 'connect' aqui, pois a conexão já foi feita
+    const activeAccount = useActiveAccount();
+    console.log("Active Account: ", activeAccount);
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log("Active Account on Submit: ", activeAccount);
 
         if (!file || !symptoms) return;
 
@@ -30,20 +43,20 @@ export default function Upload() {
                 console.log("Original JSON Data: ", jsonData);
                 const encryptedData = CryptoJS.AES.encrypt(
                     JSON.stringify(jsonData),
-                    address || ""
+                    activeAccount?.address || ""
                 ).toString();
                 console.log("Encrypted Data: ", encryptedData);
 
                 // Upload encrypted data to storage
                 console.log("Uploading encrypted data to storage...");
-                const uri = await storageClient.upload({
-                    files: [new File([encryptedData], "biohacking.txt")],
-                });
+                //const uri = await upload({
+                //    files: [new File([encryptedData], "biohacking.txt")],
+                //});
 
-                console.log("Uploaded URI: ", uri);
+                //console.log("Uploaded URI: ", uri);
 
                 // Registrar o upload na blockchain
-                await createRecord({ data: uri });
+                //await createRecord({ data: uri });
 
             };
             fileReader.readAsDataURL(file);
@@ -96,6 +109,40 @@ export default function Upload() {
                     <button type="submit" className="btn btn-primary w-full">
                         Submit
                     </button>
+                    {/* 
+                    
+                    <TransactionButton
+                        transaction={() => {
+                            // Create a transaction object and return it
+                            const tx = prepareContractCall({
+                                contract,
+                                chain: chain,
+                                method: "mint",
+                                params: [11, 1],
+                            });
+                            return tx;
+                        }}
+                        onTransactionSent={(result) => {
+                            console.log("Transaction submitted", result.transactionHash);
+                        }}
+                        onTransactionConfirmed={(receipt) => {
+                            console.log("Transaction confirmed", receipt.transactionHash);
+                        }}
+                        onError={(error) => {
+                            console.error("Transaction error", error);
+                        }}
+                    >
+                        Confirm Transaction
+                    </TransactionButton>
+                    
+                    
+                    
+                    */
+                    
+                    
+                    
+                    }
+                    
                 </form>
             </div>
         </div>

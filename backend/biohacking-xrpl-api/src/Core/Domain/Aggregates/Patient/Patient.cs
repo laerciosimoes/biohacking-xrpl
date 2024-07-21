@@ -3,22 +3,23 @@ public class Patient : AggRoot
 {
     public string WalletAddress { get; private set; }
     public string Name { get; private set; }
-    public string Email { get; private set; }
-    public string Phone { get; private set; }
-    public string Address { get; private set; }
-    public string City { get; private set; }
-    public string State { get; private set; }
-    public string Zip { get; private set; }
-    public string Country { get; private set; }
-    public DateTime DateOfBirth { get; private set; }
-    public string EmergencyContact { get; private set; }
-    public string MedicalConditions { get; private set; }
-    public string MedicalHistoric { get; private set; }
-    public string Medications { get; private set; }
-    public string Allergies { get; private set; }
-    public string BloodType { get; private set; }
-    public string SocialHistory { get; private set; }
-    public Patient(Guid id, string walletAddress, string name, string email, string phone, string address, string city, string state, string zip, string country, DateTime dateOfBirth, string emergencyContact, string medicalConditions, string medicalHistoric, string medications, string allergies, string bloodType, string socialHistory)
+#nullable enable
+    public string? Email { get; private set; }
+    public string? Phone { get; private set; }
+    public string? Address { get; private set; }
+    public string? City { get; private set; }
+    public string? State { get; private set; }
+    public string? Zip { get; private set; }
+    public string? Country { get; private set; }
+    public DateTime? DateOfBirth { get; private set; }
+    public string? EmergencyContact { get; private set; }
+    public string? MedicalConditions { get; private set; }
+    public string? MedicalHistoric { get; private set; }
+    public string? Medications { get; private set; }
+    public string? Allergies { get; private set; }
+    public string? BloodType { get; private set; }
+    public string? SocialHistory { get; private set; }
+    public Patient(Guid id, string walletAddress, string name, string? email, string? phone, string? address, string? city, string? state, string? zip, string? country, DateTime? dateOfBirth, string? emergencyContact, string? medicalConditions, string? medicalHistoric, string? medications, string? allergies, string? bloodType, string? socialHistory)
     {
         ID = id;
         WalletAddress = walletAddress;
@@ -39,6 +40,8 @@ public class Patient : AggRoot
         BloodType = bloodType;
         SocialHistory = socialHistory;
     }
+    
+#nullable restore
     public Patient()
     {
     }
@@ -152,36 +155,6 @@ public class Patient : AggRoot
             Dp.Notifications.Add("WalletAddress is required");
         if (String.IsNullOrWhiteSpace(Name))
             Dp.Notifications.Add("Name is required");
-        if (String.IsNullOrWhiteSpace(Email))
-            Dp.Notifications.Add("Email is required");
-        if (String.IsNullOrWhiteSpace(Phone))
-            Dp.Notifications.Add("Phone is required");
-        if (String.IsNullOrWhiteSpace(Address))
-            Dp.Notifications.Add("Address is required");
-        if (String.IsNullOrWhiteSpace(City))
-            Dp.Notifications.Add("City is required");
-        if (String.IsNullOrWhiteSpace(State))
-            Dp.Notifications.Add("State is required");
-        if (String.IsNullOrWhiteSpace(Zip))
-            Dp.Notifications.Add("Zip is required");
-        if (String.IsNullOrWhiteSpace(Country))
-            Dp.Notifications.Add("Country is required");
-        if (DateOfBirth == DateTime.MinValue)
-            Dp.Notifications.Add("DateOfBirth is required");
-        if (String.IsNullOrWhiteSpace(EmergencyContact))
-            Dp.Notifications.Add("EmergencyContact is required");
-        if (String.IsNullOrWhiteSpace(MedicalConditions))
-            Dp.Notifications.Add("MedicalConditions is required");
-        if (String.IsNullOrWhiteSpace(MedicalHistoric))
-            Dp.Notifications.Add("MedicalHistoric is required");
-        if (String.IsNullOrWhiteSpace(Medications))
-            Dp.Notifications.Add("Medications is required");
-        if (String.IsNullOrWhiteSpace(Allergies))
-            Dp.Notifications.Add("Allergies is required");
-        if (String.IsNullOrWhiteSpace(BloodType))
-            Dp.Notifications.Add("BloodType is required");
-        if (String.IsNullOrWhiteSpace(SocialHistory))
-            Dp.Notifications.Add("SocialHistory is required");
         Dp.Notifications.ValidateAndThrow();
     }
 }

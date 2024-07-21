@@ -10,7 +10,7 @@ public class Patient
     public string State { get; set; }
     public string Zip { get; set; }
     public string Country { get; set; }
-    public DateTime DateOfBirth { get; set; }
+    public Nullable<System.DateTime> DateOfBirth { get; set; }
     public string EmergencyContact { get; set; }
     public string MedicalConditions { get; set; }
     public string MedicalHistoric { get; set; }

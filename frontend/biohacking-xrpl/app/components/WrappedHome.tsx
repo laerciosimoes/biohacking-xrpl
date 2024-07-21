@@ -1,3 +1,5 @@
+/*
+
 'use client';
 import React from 'react';
 import { StateContextProvider } from '../context/StateContext'; 
@@ -12,3 +14,4 @@ const WrappedHome: React.FC = () => {
 };
 
 export default WrappedHome;
+*/

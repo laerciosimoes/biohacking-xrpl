@@ -41,11 +41,9 @@ export default function Page() {
         <div>
             <h1>Page 1</h1>
             <ul>
-                <li>Wallets: {wallets.map((wallet) => wallet.type).join(", ")}</li>
+                <li>Wallets: {wallets.map((wallet) => wallet.getChain()).join(", ")}</li>
                 <li>Contract: {contract.address}</li>
             </ul>
-
-
-        </div>
+        </div> 
     );
 }

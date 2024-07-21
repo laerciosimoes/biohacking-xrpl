@@ -1,11 +1,11 @@
 'use client';
 import Image from 'next/image';
-import { ConnectButton } from '@thirdweb-dev/react';
+import { ConnectButton } from "thirdweb/react";
 import { client } from './client';
 import Link from 'next/link'; 
 import Footer from './components/footer';
-import LogoWhite from '@public/LogoWhite.png';
-import { darkTheme } from '@thirdweb-dev/react';
+import LogoWhite from "@public/logo-white.png";
+import { darkTheme } from 'thirdweb/react';
 
 const customTheme = darkTheme({
   colors: {
@@ -15,6 +15,7 @@ const customTheme = darkTheme({
 
 const Home: React.FC = () => {
   return (
+
     <main>
       <video
         autoPlay
