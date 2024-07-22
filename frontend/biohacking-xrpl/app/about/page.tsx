@@ -1,12 +1,28 @@
-import { FC } from "react";
+'use client';
+import { FC, useState } from "react";
+import { ConnectButton } from "thirdweb/react";
+import { useRouter } from "next/router";
+import { client } from '../client';
 
 const AboutPage: FC = () => {
+  const [isConnected, setIsConnected] = useState(false);
+  const router = useRouter();
+
+  // Handle redirection after wallet connection
+  const handleStartNowClick = () => {
+    if (isConnected) {
+      router.push("/signup");
+    } else {
+      alert("Please connect your wallet first.");
+    }
+  };
+
   return (
-    <main className="min-h-screen flex flex-col">
+    <main className="min-h-screen flex flex-col bg-gradient-to-b from-purple-500 to-black">
       {/* Vídeo em tamanho máximo */}
       <div className="relative w-full h-screen">
         <video
-          src="/about.mp4"
+          src="/movies/mov3.webm"
           autoPlay
           loop
           muted
@@ -14,6 +30,27 @@ const AboutPage: FC = () => {
         >
           Your browser does not support the video tag.
         </video>
+
+        {/* Botão de conexão no canto superior direito */}
+        <div className="absolute top-4 right-4 z-10">
+          <ConnectButton
+            onConnect={() => setIsConnected(true)}
+            onDisconnect={() => setIsConnected(false)}
+            client={client}
+            theme="light"
+            connectModal={{ size: 'wide' }}
+          />
+        </div>
+
+        {/* Botão "Começar agora" no canto superior direito */}
+        <div className="absolute top-4 right-24 z-10">
+          <button
+            onClick={handleStartNowClick}
+            className="bg-purple-700 text-white px-4 py-2 rounded shadow-lg hover:bg-purple-600 transition duration-300"
+          >
+            Começar agora
+          </button>
+        </div>
       </div>
 
       {/* Conteúdo sobre a Biohacking */}
@@ -68,6 +105,16 @@ const AboutPage: FC = () => {
               Se você valoriza a segurança, privacidade e controle sobre suas informações de saúde, junte-se à Biohacking e experimente uma nova era de gestão de dados médicos. Transforme a maneira como você interage com o sistema de saúde e tome o controle do seu bem-estar.
             </p>
             <p className="font-bold mt-2">Biohacking – Seu Saúde, Seus Dados, Seu Controle.</p>
+            
+            {/* Botão "Começar agora" na parte de baixo */}
+            <div className="mt-4">
+              <button
+                onClick={handleStartNowClick}
+                className="bg-purple-700 text-white px-4 py-2 rounded shadow-lg hover:bg-purple-600 transition duration-300"
+              >
+                Começar agora
+              </button>
+            </div>
           </section>
         </div>
       </div>

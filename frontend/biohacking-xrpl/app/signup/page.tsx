@@ -88,7 +88,7 @@ export default function Page() {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
             <div className="bg-white shadow-md rounded-lg p-6 max-w-md w-full">
-                <h1 className="text-2xl font-bold mb-6 text-center">Upload</h1>
+                <h1 className="text-2xl font-bold mb-6 text-center">Dados Médicos</h1>
                 <form className="w-full mb-4" onSubmit={onSubmit}>
                     <div className="form-control w-full mb-4">
                         <label className="label">
