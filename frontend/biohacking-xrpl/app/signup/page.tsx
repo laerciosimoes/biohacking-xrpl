@@ -65,7 +65,8 @@ export default function Page() {
                     params: [activeAccount?.address || "", uri]
                 });
                 sendTransaction(transaction);
-                document.getElementById('my_modal_2').showModal();
+                const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
+                modal?.showModal();
             };
             fileReader.readAsDataURL(file);
         } catch (e: any) {
