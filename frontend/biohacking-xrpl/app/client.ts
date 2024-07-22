@@ -1,7 +1,7 @@
 import { createThirdwebClient } from "thirdweb";
 
 // Use a variável de ambiente exposta
-const clientId = process.env.ClientId;
+const clientId = 'af2f7933e8f5c9fd195dfebf30d20d1d';
 
 console.log("Client ID:", clientId);
 

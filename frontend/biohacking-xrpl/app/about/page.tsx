@@ -1,21 +1,10 @@
 'use client';
 import { FC, useState } from "react";
 import { ConnectButton } from "thirdweb/react";
-import { useRouter } from "next/router";
 import { client } from '../client';
 
 const AboutPage: FC = () => {
   const [isConnected, setIsConnected] = useState(false);
-  const router = useRouter();
-
-  // Handle redirection after wallet connection
-  const handleStartNowClick = () => {
-    if (isConnected) {
-      router.push("/signup");
-    } else {
-      alert("Please connect your wallet first.");
-    }
-  };
 
   return (
     <main className="min-h-screen flex flex-col bg-gradient-to-b from-purple-500 to-black">
@@ -45,7 +34,6 @@ const AboutPage: FC = () => {
         {/* Botão "Começar agora" no canto superior direito */}
         <div className="absolute top-4 right-24 z-10">
           <button
-            onClick={handleStartNowClick}
             className="bg-purple-700 text-white px-4 py-2 rounded shadow-lg hover:bg-purple-600 transition duration-300"
           >
             Começar agora
