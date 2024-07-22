@@ -97,7 +97,7 @@ const AboutPage: FC = () => {
             {/* Botão "Começar agora" na parte de baixo */}
             <div className="mt-4">
               <button
-                onClick={handleStartNowClick}
+               
                 className="bg-purple-700 text-white px-4 py-2 rounded shadow-lg hover:bg-purple-600 transition duration-300"
               >
                 Começar agora
