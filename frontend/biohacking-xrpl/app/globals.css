@@ -1,4 +1,3 @@
-/* styles/globals.css */
 @import url('https://fonts.googleapis.com/css2?family=Aldrich&display=swap');
 
 @tailwind base;
@@ -8,4 +7,19 @@
 /* Adicione a fonte como uma fonte padrão */
 body {
   font-family: 'Aldrich', sans-serif;
+}
+
+.neon-box {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid transparent; /* Borda transparente inicial */
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo preto transparente */
+  position: relative;
+  transition: all 0.3s ease; /* Suavizar a transição para o efeito neon */
+}
+
+/* Efeito neon lilás na borda quando o mouse passa sobre a caixa */
+.neon-box:hover {
+  border: 2px solid #8a2be2; /* Cor lilás para a borda */
+  box-shadow: 0 0 15px #8a2be2; /* Efeito neon lilás com sombra */
 }
